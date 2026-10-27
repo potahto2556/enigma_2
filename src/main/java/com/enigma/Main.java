@@ -123,7 +123,7 @@ public class Main {
                 "Noah",
                 35,
                 "Male",
-                "Wanted to stop Evan from revealing the old case.",
+                "Wanted to stop evan from revealing the old case.",
                 "Claims he was in the cafeteria.",
                 "Evan's business partner",
                 35,
