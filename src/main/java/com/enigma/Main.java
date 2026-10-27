@@ -21,9 +21,9 @@ public class Main {
 
         // 1. WELCOME
 
-        System.out.println("======================================");
+        System.out.println("=====================================");
         System.out.println("          ENIGMA");
-        System.out.println("======================================");
+        System.out.println("=====================================");
 
         System.out.println("\nWelcome, Detective.");
         System.out.println("Before starting the investigation,");
@@ -93,7 +93,7 @@ public class Main {
 
         Location studio = new Location(
                 "Studio 7",
-                "The locked broadcasting studio where Seo-jun disappeared."
+                "The locked broadcasting studio where Noah disappeared."
         );
 
         Location securityRoom = new Location(
@@ -108,7 +108,7 @@ public class Main {
 
         Location archiveRoom = new Location(
                 "Archive Room",
-                "The room containing the old case files and Yuna's belongings."
+                "The room containing the old case files and Maya's belongings."
         );
 
         enigmaCase.addLocation(studio);
