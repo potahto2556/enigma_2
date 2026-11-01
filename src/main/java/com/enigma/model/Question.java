@@ -1,49 +1,30 @@
 package com.enigma.model;
 
 public class Question {
-
+    private String id;
     private String questionText;
     private String category;
     private int points;
 
-    // Constructor
     public Question(String questionText, String category, int points) {
+        this(category, questionText, category, points);
+    }
+
+    public Question(String id, String questionText, String category, int points) {
+        this.id = id;
         this.questionText = questionText;
         this.category = category;
         this.points = points;
     }
 
-    // Get question text
-    public String getQuestionText() {
-        return questionText;
-    }
+    public String getId() { return id; }
+    public String getQuestionText() { return questionText; }
+    public String getCategory() { return category; }
+    public int getPoints() { return points; }
+    public void setQuestionText(String questionText) { this.questionText = questionText; }
+    public void setCategory(String category) { this.category = category; }
+    public void setPoints(int points) { this.points = points; }
 
-    // Get question category
-    public String getCategory() {
-        return category;
-    }
-
-    // Get points
-    public int getPoints() {
-        return points;
-    }
-
-    // Set question text
-    public void setQuestionText(String questionText) {
-        this.questionText = questionText;
-    }
-
-    // Set category
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    // Set points
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    // Display question
     public void displayQuestion() {
         System.out.println("Question: " + questionText);
         System.out.println("Category: " + category);
