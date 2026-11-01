@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101114">
+  <meta name="description" content="ENIGMA — an interactive detective investigation.">
+  <title>ENIGMA — The Last Broadcast</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/screens.css">
+  <script type="module" src="/js/app.js"></script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <section id="coverScreen" class="cover-screen">
+    <header class="cover-topbar"><a class="brand" href="#"><span class="brand-mark">E</span><span>ENIGMA<small>INVESTIGATION BUREAU</small></span></a><div class="archive-label"><span class="live-dot"></span> CLASSIFIED CASE FILE <b>011</b></div></header>
+    <div class="cover-content">
+      <div class="cover-copy">
+        <p class="eyebrow"><i></i> BROADCAST STATION <b>/</b> 11:47 PM</p>
+        <h1>The Last<br><em>Broadcast</em></h1>
+        <p class="cover-lede">A producer found unconscious.<br>Three minutes missing from the cameras.<br>Everyone has a story. Find the one that holds.</p>
+        <button id="beginButton" class="btn btn-red" type="button">Open case file <span>↗</span></button>
+        <p class="microcopy">A story-driven investigation · Single-player</p>
+      </div>
+      <div class="cover-board" aria-label="Illustrated detective evidence board">
+        <div class="board-grid"></div><div class="board-caption top-caption">EVIDENCE ROOM <span>01:47 AM</span></div>
+        <div class="red-string line-a"></div><div class="red-string line-b"></div><div class="red-string line-c"></div>
+        <article class="paper paper-one"><small>INCIDENT REPORT</small><b>STUDIO 7</b><span>Victim: Evan<br>Found at 11:50 PM</span><i class="pin"></i></article>
+        <article class="paper paper-two"><small>TIME OF INCIDENT</small><b>11:47</b><span>Watch stopped<br>Blackout begins</span><i class="pin pin-red"></i></article>
+        <article class="paper paper-three"><small>SECURITY LOG</small><b>03:00 MIN</b><span>CCTV footage<br>unavailable</span><i class="pin"></i></article>
+        <div class="portrait-placeholder"><div class="portrait-head"></div><div class="portrait-body"></div><span>PERSONS OF INTEREST</span></div>
+        <div class="stamp">UNSOLVED<br><b>011</b></div>
+        <div class="board-caption bottom-caption">THE TRUTH IS IN THE DETAILS</div>
+      </div>
+    </div>
+    <footer class="cover-footer"><span>ENIGMA CASE ARCHIVE</span><span>CASE 011 <i>•</i> THE LAST BROADCAST</span><span>INVESTIGATE · CONNECT · REVEAL</span></footer>
+  </section>
+
+  <dialog id="registrationDialog" class="dialog">
+    <form id="registrationForm" class="dialog-form" novalidate>
+      <button id="closeDialog" class="close-button" type="button" aria-label="Close">×</button>
+      <p class="eyebrow"><i></i> DETECTIVE REGISTRATION</p><h2>Open your case file.</h2>
+      <p class="muted-copy">Enter your details to receive the briefing for Case 011.</p>
+      <label for="detectiveName">Detective name <b>*</b></label><input id="detectiveName" maxlength="60" required placeholder="Your name" autocomplete="name">
+      <div class="form-row"><div><label for="detectiveAge">Age <small>optional</small></label><input id="detectiveAge" type="number" min="1" max="130" placeholder="Age"></div><div><label for="detectiveGender">Gender <small>optional</small></label><input id="detectiveGender" maxlength="40" placeholder="Prefer not to say"></div></div>
+      <p id="registrationError" class="error-text" aria-live="polite"></p>
+      <button id="registerButton" class="btn btn-red btn-wide" type="submit">Register & receive briefing <span>↗</span></button>
+      <p class="microcopy centered">Your profile lasts for this game session.</p>
+    </form>
+  </dialog>
+
+  <div id="gameApp" class="app-shell" hidden>
+    <aside class="sidebar">
+      <a class="brand side-brand" href="#dashboard" aria-label="ENIGMA"><span class="brand-mark">E</span><span>ENIGMA<small>CASEWORK</small></span></a>
+      <div class="side-case"><span class="eyebrow">ACTIVE CASE</span><strong>011 <i>·</i> THE LAST BROADCAST</strong><span class="side-status"><i></i> INVESTIGATION OPEN</span></div>
+      <nav class="side-nav" aria-label="Investigation navigation">
+        <button data-screen="dashboard" class="nav-item"><span>01</span> Case overview</button>
+        <button data-screen="suspects" class="nav-item"><span>02</span> Persons of interest</button>
+        <button data-screen="locations" class="nav-item"><span>03</span> Locations</button>
+        <button data-screen="evidence" class="nav-item"><span>04</span> Evidence room</button>
+        <button data-screen="interrogation" class="nav-item"><span>05</span> Interrogation</button>
+        <button data-screen="deduction" class="nav-item"><span>06</span> Deduction board</button>
+        <button data-screen="report" class="nav-item"><span>07</span> Case report</button>
+      </nav>
+      <div class="side-profile"><div class="profile-seal">D</div><div><small>LEAD INVESTIGATOR</small><strong id="sidebarDetective">Detective</strong></div></div>
+    </aside>
+
+    <div class="app-main">
+      <header class="app-topbar"><div><span class="top-kicker">ENIGMA / CASE 011</span><span id="topScreenTitle" class="top-screen-title">Case overview</span></div><div class="topbar-right"><span class="server-status"><i></i> CASE LINK ACTIVE</span><span id="topScore" class="score-pill">0 XP</span></div></header>
+      <main class="screen-content">
+        <section id="screen-briefing" class="game-screen briefing-screen" hidden>
+          <p class="eyebrow"><i></i> CLASSIFIED CASE BRIEFING</p><div class="briefing-layout"><div><div id="briefCaseId" class="case-id">CASE 011</div><h1 id="briefTitle">The Last Broadcast</h1><p id="briefDescription" class="large-copy"></p><div class="rule"></div><div class="timeline-row"><div><small>INCIDENT WINDOW</small><strong>11:47 — 11:50 PM</strong></div><div><small>VICTIM</small><strong id="briefVictim">Evan</strong></div><div><small>LAST SEEN</small><strong id="briefLastSeen">Studio 7</strong></div></div><h3>Investigation objectives</h3><ol class="objectives"><li>Explore the station and collect physical evidence.</li><li>Question the four people connected to the case.</li><li>Connect the clues and support your final theory.</li></ol><button id="enterDashboard" class="btn btn-red">Enter investigation <span>↗</span></button></div><aside class="victim-file"><div class="file-tag">VICTIM PROFILE <span>011-A</span></div><div class="victim-portrait"><div class="portrait-head"></div><div class="portrait-body"></div></div><h2 id="briefVictimName">Evan</h2><p id="briefVictimOccupation">Television Producer</p><div class="file-line"><small>CASE STATUS</small><b>OPEN / UNRESOLVED</b></div><div class="file-seal">EVIDENCE PENDING</div></aside></div>
+        </section>
+
+        <section id="screen-dashboard" class="game-screen" hidden>
+          <div class="page-heading"><div><p class="eyebrow"><i></i> INVESTIGATION DESK</p><h1>Case overview</h1><p class="muted-copy">Your investigation, evidence, and next lead.</p></div><span id="dashboardCaseId" class="case-stamp-small">CASE 011</span></div>
+          <article class="objective-banner"><div class="objective-icon">!</div><div><small>CURRENT OBJECTIVE</small><strong id="objectiveText">Search Studio 7 for the first physical clues.</strong></div><button data-screen="locations" class="text-button">View locations ↗</button></article>
+          <div class="stat-grid"><article class="stat-block"><small>CASE SCORE</small><strong id="statScore">0</strong><span>investigation points</span></article><article class="stat-block"><small>EVIDENCE</small><strong><span id="statEvidence">0</span><i> / 11</i></strong><span>clues collected</span></article><article class="stat-block"><small>LOCATIONS</small><strong><span id="statLocations">0</span><i> / 4</i></strong><span>areas searched</span></article><article class="stat-block"><small>INTERVIEWS</small><strong id="statInterviews">0</strong><span>suspects questioned</span></article></div>
+          <div class="dashboard-grid"><section class="panel"><div class="panel-heading"><div><small>CASE ACTIVITY</small><h2>Recently recovered</h2></div><button data-screen="evidence" class="text-button">Evidence room ↗</button></div><div id="recentEvidence" class="recent-list"><p class="empty-note">No evidence collected yet. Begin with Studio 7.</p></div></section><section class="panel suspect-overview"><div class="panel-heading"><div><small>PERSONS OF INTEREST</small><h2>Four accounts. One truth.</h2></div></div><div id="dashboardSuspects" class="mini-suspect-list"></div><button data-screen="suspects" class="text-button">Review all profiles ↗</button></section></div>
+        </section>
+
+        <section id="screen-suspects" class="game-screen" hidden>
+          <div class="page-heading"><div><p class="eyebrow"><i></i> CASE DOSSIERS</p><h1>Persons of interest</h1><p class="muted-copy">Select a dossier. Statements and details may change as evidence emerges.</p></div></div>
+          <div id="suspectGrid" class="suspect-grid"></div>
+          <div id="suspectDossier" class="dossier panel"><div class="empty-state"><span>◉</span><h2>Select a person of interest</h2><p>Open a dossier to review known details and begin an interview.</p></div></div>
+        </section>
+
+        <section id="screen-locations" class="game-screen" hidden>
+          <div class="page-heading"><div><p class="eyebrow"><i></i> BROADCAST STATION</p><h1>Location exploration</h1><p class="muted-copy">Choose a station area to inspect and collect its clues.</p></div></div>
+          <div class="location-layout"><div id="locationMap" class="location-map"><div class="map-title">STATION FLOOR PLAN <span>CASE 011</span></div><div class="map-route" aria-hidden="true"></div></div><article id="locationDetail" class="panel location-detail"><div class="empty-state"><span>⌖</span><h2>Select a location</h2><p>Location details and investigation results will appear here.</p></div></article></div>
+        </section>
+
+        <section id="screen-evidence" class="game-screen" hidden>
+          <div class="page-heading"><div><p class="eyebrow"><i></i> FORENSIC ARCHIVE</p><h1>Evidence room</h1><p class="muted-copy">Inspect collected evidence and trace where it was found.</p></div><span id="evidenceCount" class="case-stamp-small">0 ITEMS</span></div>
+          <div id="evidenceGrid" class="evidence-grid"></div>
+        </section>
+
+        <section id="screen-interrogation" class="game-screen" hidden>
+          <div class="page-heading"><div><p class="eyebrow"><i></i> INTERVIEW ROOM</p><h1>Interrogation</h1><p class="muted-copy">Choose a question. Present collected evidence to challenge a statement.</p></div></div>
+          <div class="interrogation-layout"><aside class="panel interview-subject"><label for="interviewSuspect">SUBJECT</label><select id="interviewSuspect"></select><div id="interviewPortrait" class="interview-portrait"><span></span></div><h2 id="interviewName">Select a suspect</h2><p id="interviewRole" class="muted-copy"></p><div class="interview-status"><small>INTERVIEW STATUS</small><strong id="interviewStatus">NOT STARTED</strong></div></aside><section class="panel conversation-panel"><div class="conversation-header"><span class="live-dot"></span><span>RECORDED INTERVIEW</span><small id="conversationCase">CASE 011</small></div><div id="dialogueLog" class="dialogue-log"><p class="empty-note">Select a person of interest to begin the conversation.</p></div><div class="question-area"><small>ASK A QUESTION</small><div id="questionOptions" class="question-options"></div></div><div class="present-row"><label for="evidenceToPresent">PRESENT EVIDENCE</label><select id="evidenceToPresent"></select><button id="presentEvidenceButton" class="btn btn-quiet" type="button">Present</button></div></section></div>
+        </section>
+
+        <section id="screen-deduction" class="game-screen" hidden>
+          <div class="page-heading"><div><p class="eyebrow"><i></i> THEORY CONSTRUCTION</p><h1>Deduction board</h1><p class="muted-copy">Drag clues onto your theory, or tap them to select. Java checks your submitted evidence.</p></div></div>
+          <div class="deduction-instructions"><span>01</span> Choose who you believe is responsible. <span>02</span> Link the evidence that supports your theory. <span>03</span> Submit for review.</div>
+          <div class="deduction-board"><section class="board-column"><h2>PERSONS OF INTEREST</h2><div id="theorySuspects" class="theory-suspects"></div></section><div class="board-connector" aria-hidden="true"><svg viewBox="0 0 100 400" preserveAspectRatio="none"><path d="M0 70 C55 70 40 170 100 170 M0 190 C55 190 45 240 100 240 M0 310 C55 310 40 270 100 270"/></svg></div><section class="board-column evidence-column"><h2>LINKED EVIDENCE <span id="linkedCount">0 SELECTED</span></h2><div id="theoryEvidence" class="theory-evidence drop-zone"><p class="drop-hint">Drop evidence here or select evidence cards below.</p></div><div class="submit-theory"><button id="submitTheory" class="btn btn-red" type="button">Submit final theory <span>↗</span></button><p id="theoryFeedback" class="feedback" aria-live="polite"></p></div></section></div>
+          <section class="panel available-evidence"><div class="panel-heading"><div><small>COLLECTED CLUES</small><h2>Choose evidence to connect</h2></div></div><div id="availableEvidence" class="evidence-pick-list"></div></section>
+        </section>
+
+        <section id="screen-report" class="game-screen" hidden>
+          <div class="page-heading"><div><p class="eyebrow"><i></i> ENIGMA CASE ARCHIVE</p><h1>Final case report</h1><p class="muted-copy">The report reflects the outcome and evidence recorded by the Java case file.</p></div></div>
+          <article id="reportHero" class="report-hero"><div class="report-seal">011</div><div><small id="reportStatus">CASE IN PROGRESS</small><h2 id="reportTitle">The Last Broadcast</h2><p id="reportExplanation">Complete the investigation and submit your theory to generate the final report.</p></div></article>
+          <div class="report-stats"><article class="stat-block"><small>DETECTIVE</small><strong id="reportDetective">—</strong></article><article class="stat-block"><small>FINAL SCORE</small><strong id="reportScore">0</strong></article><article class="stat-block"><small>EVIDENCE</small><strong id="reportEvidenceCount">0</strong></article><article class="stat-block"><small>INTERVIEWS</small><strong id="reportInterviewCount">0</strong></article></div>
+          <section class="panel"><div class="panel-heading"><div><small>RECORDED EVIDENCE</small><h2>Case attachments</h2></div></div><div id="reportEvidence" class="recent-list"><p class="empty-note">No evidence recorded.</p></div></section>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="evidenceDialog" class="dialog evidence-dialog"><button id="closeEvidenceDialog" class="close-button" type="button" aria-label="Close">×</button><p class="eyebrow"><i></i> EVIDENCE INSPECTION</p><small id="inspectEvidenceId" class="mono-label"></small><h2 id="inspectEvidenceName"></h2><p id="inspectEvidenceDescription" class="large-copy"></p><div class="file-line"><small>DISCOVERY LOCATION</small><b id="inspectEvidenceLocation"></b></div><button id="inspectCloseButton" class="btn btn-quiet" type="button">Close inspection</button></dialog>
+</body>
+</html>
+
