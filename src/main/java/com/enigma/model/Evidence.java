@@ -38,4 +38,3 @@ public class Evidence {
         return important;
     }
 }
-

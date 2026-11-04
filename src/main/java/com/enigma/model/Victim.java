@@ -70,4 +70,3 @@ public class Victim extends Person {
         System.out.println("Relationship to Suspects: " + relationshipToSuspects);
     }
 }
-
